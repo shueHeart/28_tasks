@@ -15,4 +15,14 @@ public class Level1
         int neededNum = Integer.parseInt(str);
         return neededNum;
     }
+    
+     public static int odometer(int [] oksana) {
+        int km = 0;
+        int lastTime = 0;
+        for(int i = 1; i < oksana.length; i += 2) {
+            km += (oksana[i] - lastTime) * oksana[i - 1];
+            lastTime = oksana[i];
+        }
+        return km;
+    }
 }
