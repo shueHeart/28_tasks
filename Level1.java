@@ -33,10 +33,10 @@ public class Level1
                 plac[x][y] = 0;
             }
         }
-        for (int i = 0; i < L; i += 2) {
+        for (int i = 0; i <= L * 2; i += 2) {
             plac[battalion[i]][battalion[i + 1]] = 1;
         }
-        int days = 0;
+        int days = 1;
         while (notConquest(N, M, plac)){
             List<int[]> list = new ArrayList<int[]>();
             for (int x = 0; x < N; ++x) {
@@ -44,12 +44,13 @@ public class Level1
                     if (plac[x][y] != 0) {
                         if(x + 1 < N) list.add(new int[]{x + 1, y});
                         if(x - 1 > -1) list.add(new int[]{x - 1, y});
-                        if(x + 1 < M) list.add(new int[]{x, y + 1});
+                        if(y + 1 < M) list.add(new int[]{x, y + 1});
                         if(y - 1 > -1) list.add(new int[]{x, y - 1});
                     }
                 }
             }
-            for(int ind = 0; ind < list.size() - 1; ++ind) {
+            for(int ind = 0; ind < list.size(); ++ind) {
+            	
                 int[] coords = list.get(ind);
                 plac[coords[0]][coords[1]] = 1;
             }
