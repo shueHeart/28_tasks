@@ -9,7 +9,7 @@ public class Level1
                 plac[x][y] = 0;
             }
         }
-        for (int i = 0; i < L; ++i) {
+        for (int i = 0; i < L * 2; i += 2) {
             plac[battalion[i] - 1][battalion[i + 1] - 1] = 1;
         }
         int days = 1;
