@@ -47,7 +47,6 @@ public class Level1
 
 			}
 			extractedString = extractedString.trim();
-			System.out.println(extractedString);
 			if(extractedString != " ") extractedStrings.add(extractedString);			
 		}
 		int[] yesOrNot = new int[extractedStrings.size()];
