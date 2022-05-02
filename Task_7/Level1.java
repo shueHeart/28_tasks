@@ -4,16 +4,20 @@ public class Level1
 {
 	public static int [] WordSearch (int len, String s, String subs) {
 		List<String> extractedStrings = new ArrayList<String>();
-		s = s.trim();
+		s = s.replace(")", ";");
+		subs = subs.replace(")", ";");
+		
 		while (s.length() != 0) {
+			s = s.trim();
 			String extractedString = "";
 			while (extractedString.length() < len) {
 				int firstSpaceIndex = s.indexOf(" ");
-				String space = "";
+				String space = "";		
 				if (firstSpaceIndex != -1) {
 					space = s.substring(0, firstSpaceIndex);
 					if(space.length() + extractedString.length() + 1 <= len ) {
 						s = s.replaceFirst(space + " ", "");
+
 						if (extractedString.length() != 0) {
 							extractedString += " " + space;
 						} else {
@@ -42,10 +46,9 @@ public class Level1
 						}
 					}
 					break;
-				}
-					
-
+				}					
 			}
+			
 			extractedString = extractedString.trim();
 			if(extractedString != " ") extractedStrings.add(extractedString);			
 		}
