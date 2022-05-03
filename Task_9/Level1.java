@@ -12,48 +12,8 @@ public class Level1
 		int column = Math.round(sqrt);		
 		int stroke = column - 1;
 		
-		if (!encode) {
-			char[][] uncipher;
-			
-
-			if (forMatrix.length <= stroke * column) {
-				uncipher = new char[stroke][column];
-			} else {
-				++stroke;
-				uncipher = new char[stroke][column];
-			}
-			
-			for (int i = 0; i < stroke; ++i) {
-				for (int j = 0; j < column; ++j) {
-					uncipher[i][j] = ' ';
-				}
-			}
-			
-			for (int i = 0; i < stroke; ++i) {
-				int spaceIndex = s.indexOf(" ");
-				String word = "";
-				if(spaceIndex != -1) word = s.substring(0, spaceIndex);
-				else word = s;
-				s = s.replace(word + " ", "");
-				for (int j = 0; j < word.length(); ++j) {
-					uncipher[i][j] = word.charAt(j);
-				}
-			}
-			String unciphered = "";
-			for (int i = 0; i < column; ++i) {
-				for (int j = 0; j < stroke; ++j) {			
-					if (uncipher[j][i] != ' ') {
-						unciphered += uncipher[j][i];
-					} else {
-						break;
-					}
-				}
-			}
-			return unciphered;
-		}
-		
 		char[][] cipher;
-		
+
 		if (forMatrix.length <= stroke * column) {
 			cipher = new char[stroke][column];
 		} else {
@@ -66,6 +26,38 @@ public class Level1
 				cipher[i][j] = ' ';
 			}
 		}
+		if (!encode) {			
+			
+			for (int i = 0; i < stroke; ++i) {
+				for (int j = 0; j < column; ++j) {
+					cipher[i][j] = ' ';
+				}
+			}
+			
+			for (int i = 0; i < stroke; ++i) {
+				int spaceIndex = s.indexOf(" ");
+				String word = "";
+				if(spaceIndex != -1) word = s.substring(0, spaceIndex);
+				else word = s;
+				s = s.replace(word + " ", "");
+				for (int j = 0; j < word.length(); ++j) {
+					cipher[i][j] = word.charAt(j);
+				}
+			}
+			String unciphered = "";
+			for (int i = 0; i < column; ++i) {
+				for (int j = 0; j < stroke; ++j) {			
+					if (cipher[j][i] != ' ') {
+						unciphered += cipher[j][i];
+					} else {
+						break;
+					}
+				}
+			}
+			unciphered = unciphered.trim();
+
+			return unciphered;
+		}		
 		
 		int count = 0;
 		for (int i = 0; i < stroke; ++i) {
@@ -88,7 +80,7 @@ public class Level1
 			}
 			ciphered += " ";
 		}
-		ciphered.trim();
-		return ciphered;	
+		ciphered = ciphered.trim();
+		return ciphered;
 	}
 }
