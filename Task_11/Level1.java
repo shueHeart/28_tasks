@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Level1
 {
-	public static String BigMinus (String s1, String s2) {
+		public static String BigMinus (String s1, String s2) {
 		if (s2.length() > s1.length()) {
 			String buf = s1;
 			s1 = s2;
@@ -31,7 +31,7 @@ public class Level1
 			
 			int localResult = numFromS1 - numFromS2;
 
-			if (localResult >= 0 && (i != 0 || localResult != 0)) {
+			if (localResult >= 0) {
 				result = localResult + "" + result;
 			}
 			else {
@@ -58,7 +58,11 @@ public class Level1
 				result = localResult + "" + result;
 			}
 		}
+		while (result.length() > 1 && result.indexOf("0") == 0  ) {
+			result = result.replaceFirst("0", "");
+		}
 		return result;	
 	}
+
 
 }
