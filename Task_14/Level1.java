@@ -8,7 +8,7 @@ public class Level1
 		
 		int prevDistance = 0;
 		
-		if (L <= track[0][0]) {
+		if (N == 0 || L <= track[0][0]) {
 			return L;
 		}
 		
