@@ -6,7 +6,12 @@ public class Level1
 		while (S1.length() != 0) {
 			if (S1.length() < S2.length()) return false;
 			
-			String stroke = S1.substring(0, S1.indexOf(" "));
+			int indStroke = S1.indexOf(" ");
+			String stroke = "";
+
+			if(indStroke != -1) stroke = S1.substring(0, indStroke);
+			else stroke = S1.substring(0);
+			
 			
 			String tanks = S2;
 			
@@ -73,7 +78,7 @@ public class Level1
 		for (int i = 0; i < str.length(); ++i) {
 			int strIndex = i;
 			for (int j = 0; j < checkStr.length(); ++j) {
-				if (charsStr[strIndex] == charsCheckStr[j]) {
+				if (strIndex + 1 != str.length() && charsStr[strIndex] == charsCheckStr[j]) {
 					++strIndex;
 				} 
 				else {
