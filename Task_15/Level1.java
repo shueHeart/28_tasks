@@ -4,7 +4,7 @@ public class Level1
 {
 	public static boolean TankRush(int H1, int W1, String S1, int H2, int W2, String S2) {
 		while (S1.length() != 0) {
-			if (S1.length() < S2.length()) return false;
+
 			
 			int indStroke = S1.indexOf(" ");
 			String stroke = "";
@@ -12,84 +12,30 @@ public class Level1
 			if(indStroke != -1) stroke = S1.substring(0, indStroke);
 			else stroke = S1.substring(0);
 			
-			
 			String tanks = S2;
 			
-			String notCheckedArea = S1;
-			
-			int lastCoordinatesOnArea = -1;
-			
 			while (tanks.length() != 0) {
-				int spaceIndex = notCheckedArea.indexOf(" ");
-				String checkingPartOfArea = "";
+				int index = tanks.indexOf(" ");
 				
-				if(spaceIndex != -1) checkingPartOfArea = notCheckedArea.substring(0, spaceIndex);
-				else checkingPartOfArea = notCheckedArea.substring(0);
+				String tank = "";
 				
-				int spaceTanksIndex = tanks.indexOf(" ");
-				String coords = "";
+				if (index != -1) tank = tanks.substring(0, index);
+				else tank = tanks.substring(0);
 				
-				if (spaceTanksIndex != -1) coords = tanks.substring(0, spaceTanksIndex);
-				else coords = tanks.substring(0);
-				
-				List<Integer> tanksCoordinates = findAllIncludes(checkingPartOfArea, coords); 
-
-				boolean included = false;
-
-				
-				for (Integer tanksCoordinatesOnArea : tanksCoordinates) {
-					if (tanksCoordinatesOnArea == lastCoordinatesOnArea || lastCoordinatesOnArea == -1) {
-						lastCoordinatesOnArea = tanksCoordinatesOnArea;
-						included = true;
-					}
+				if (stroke.contains(tank)) {
+					S2 = S2.replaceFirst(tank, "");
+					S2 = S2.trim();
 				}
-
-				if (!included) {
-					break;
-				}
-
-				tanks = tanks.replaceFirst(coords, "");
+				tanks = tanks.replaceFirst(tank, "");
 				tanks = tanks.trim();
 				
-				notCheckedArea = notCheckedArea.replaceFirst(checkingPartOfArea, "");
-				notCheckedArea = notCheckedArea.trim();
-
 			}
 			
-			if (tanks.length() == 0) { 
-				return true;
-			}
-			else {
-				S1 = S1.replaceFirst(stroke, "");
-				S1 = S1.trim();
-			}
-			
+			S1 = S1.replaceFirst(stroke, "");
+			S1 = S1.trim();
+			if (S2.length() == 0) return true;
 		}
-		return false;
+		if (S2.length() == 0) return true;
+		else return false;
 	}
-	
-	private static List<Integer> findAllIncludes (String str, String checkStr) {
-		char[] charsStr = str.toCharArray();
-		
-		char[] charsCheckStr = checkStr.toCharArray();
-		
-		List<Integer> indexes= new ArrayList<Integer>();
-		
-		for (int i = 0; i < str.length(); ++i) {
-			int strIndex = i;
-			for (int j = 0; j < checkStr.length(); ++j) {
-				if (strIndex + 1 != str.length() && charsStr[strIndex] == charsCheckStr[j]) {
-					++strIndex;
-				} 
-				else {
-					break;
-				}
-				if (j == checkStr.length() - 1) {
-					indexes.add(i);
-				}
-			}
-		}
-		return indexes;
-	}
-	
 }
