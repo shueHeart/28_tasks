@@ -17,7 +17,9 @@ public class Level1
 			
 			String notCheckedArea = S1;
 			
-			List<Integer> lastCoordinates = findAllIncludes(stroke, tanks.substring(0, tanks.indexOf(" ")));
+			List<Integer> lastCoordinates = new ArrayList<Integer>();
+			lastCoordinates.add(-1);
+			
 			while (tanks.length() != 0) {
 				int spaceIndex = notCheckedArea.indexOf(" ");
 				String checkingPartOfArea = "";
@@ -35,18 +37,15 @@ public class Level1
 
 				boolean included = false;
 
-				
 				for (Integer tanksCoordinatesOnArea : tanksCoordinates) {
-					for (Integer lastCoordinatesOnArea : lastCoordinates) {
-						if (tanksCoordinatesOnArea == lastCoordinatesOnArea || lastCoordinatesOnArea == -1) {
-//							lastCoordinates.add(tanksCoordinatesOnArea);
-							lastCoordinates = tanksCoordinates;
-							included = true;
-						}
+					if (lastCoordinates.contains(tanksCoordinatesOnArea) || lastCoordinates.contains(-1)) {
+						included = true;
 					}
-					
 				}
-
+				
+				lastCoordinates = tanksCoordinates;
+				
+				
 				if (!included) {
 					break;
 				}
@@ -76,20 +75,23 @@ public class Level1
 		
 		char[] charsCheckStr = checkStr.toCharArray();
 		
-		List<Integer> indexes= new ArrayList<Integer>();
+		List<Integer> indexes = new ArrayList<Integer>();
 		
 		for (int i = 0; i < str.length(); ++i) {
 			int strIndex = i;
+
 			for (int j = 0; j < checkStr.length(); ++j) {
-				if (strIndex + 1 != str.length() && charsStr[strIndex] == charsCheckStr[j]) {
+				if (strIndex + 1 <= str.length() && charsStr[strIndex] == charsCheckStr[j]) {
 					++strIndex;
 				} 
 				else {
 					break;
 				}
+
 				if (j == checkStr.length() - 1) {
 					indexes.add(i);
 				}
+				
 			}
 		}
 		return indexes;
