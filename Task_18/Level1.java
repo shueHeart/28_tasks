@@ -20,9 +20,6 @@ public class Level1
 				data[i + 1] = arr[1];
 				data[i + 2] = arr[2];
 			}
-			for (int i = 0; i < N; ++i) {
-				System.out.println(data[i]);	
-			}
 			spinned = false;
 			for (int i = 0; i < N - 1; ++i) {
 				if (data[i] - data[i + 1] != -1) spinned = true; 
