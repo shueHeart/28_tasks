@@ -3,23 +3,37 @@ import java.util.*;
 public class Level1
 {
 	public static boolean MisterRobot(int N, int [] data) {
-		
-		for (int i = N - 1; i > 2; --i) {
-			int[] arr = {data[i - 2], data[i - 1], data[i]}; 
-			spin(arr, minValueIndexFounder(arr));
-		}
-		
-		for (int i = 0; i < N - 2; ++i) {
-			int[] arr = {data[i], data[i + 1], data[i + 2]}; 
-			spin(arr, maxValueIndexFounder(arr));
-		}
-		
-		for (int i = 0; i < N - 1; ++i) {
-			if (data[i] - data[i + 1] != 1) return false; 
+		boolean spinned = true;
+		while (spinned) {
+			for (int i = 0; i < N - 2; ++i) {
+				int[] arr = {data[i], data[i + 1], data[i + 2]}; 
+				
+				for (int j = 0; j < 3 && !check(arr); ++j) {
+					if (arr[0] > arr[1] || arr[1] > arr[2]) {
+						arr = spin(arr, 1);
+					}
+				}
+				if (!check(arr)) {
+					return false;
+				}
+				data[i] = arr[0];
+				data[i + 1] = arr[1];
+				data[i + 2] = arr[2];
+			}
+			spinned = false;
+			for (int i = 0; i < N - 1; ++i) {
+				if (data[i] - data[i + 1] != -1) spinned = true; 
+			}
 		}
 		return true;
 	}
 
+	
+	private static boolean check (int[] checking) {
+		if (checking[0] < checking[1] && checking[1] < checking[2]) return true;
+		else return false;
+	}
+	
 	private static int[] spin (int[] spinner, int circles) {
 		for (int i = 0; i < circles; ++i) {
 			int buf = spinner[0];
@@ -28,21 +42,5 @@ public class Level1
 			spinner[2] = buf;
 		}
 		return spinner;
-	}
-	
-	private static int minValueIndexFounder (int[] spinner) {
-		int index = 0;
-		for (int i = 0; i < 3; ++i) {
-			if (spinner[index] < spinner[i]) index = i; 
-		}
-		return index;
-	}
-	
-	private static int maxValueIndexFounder (int[] spinner) {
-		int index = 0;
-		for (int i = 0; i < 3; ++i) {
-			if (spinner[index] > spinner[i]) index = i; 
-		}
-		return index;
 	}
 }
