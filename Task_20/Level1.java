@@ -12,11 +12,6 @@ public class Level1
 	public static String BastShoe(String command) {
 		
 		char numOperation = command.charAt(0);
-//		System.out.println("****");
-//		for (int i = 0; i < history.length; ++i) {
-//			System.out.println(history[i]);
-//		}
-//		System.out.println("****");
 		
 		
 		switch (numOperation) {
