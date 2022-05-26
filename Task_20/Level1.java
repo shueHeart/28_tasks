@@ -75,6 +75,8 @@ public class Level1
 			
 			String forDelete = reversed.substring(0, N);
 			
+		
+			
 			reversed = reversed.replaceFirst(forDelete, "");
 			
 			text = new StringBuilder(reversed).reverse().toString();
@@ -100,7 +102,7 @@ public class Level1
 	}
 	
 	private static void undo() {
-		if (historyIndex < -1 || historyIndex > history.length - 1) return;
+		if (historyIndex <= -1 || historyIndex > history.length - 1) return;
 		String historyFragment = history[historyIndex];
 		
 		String numOperation = new String(new char[] {historyFragment.charAt(0)});
@@ -124,27 +126,27 @@ public class Level1
 	
 	
 	private static void redo() {
+		++historyIndex;
+
+		if (historyIndex <= -1 || historyIndex > history.length - 1) return;
 		
-		if (historyIndex + 1 < -1 || historyIndex + 1 > history.length - 1) return;
-		
-		String historyFragment = history[historyIndex + 1];
+		String historyFragment = history[historyIndex];
 		
 		String numOperation = new String(new char[] {historyFragment.charAt(0)});
 		
 		String word = historyFragment.replaceFirst(numOperation + " ", "");
-		
+
 		switch (numOperation) {
 			case "1" : {
-//				++historyIndex;
 				add(word, true);
 				break;
 			}
 			case "2" : {
-//				++historyIndex;
 				delete(word.length(), true);
 				break;
 			}	
 		}
+
 	}
 	
 	
