@@ -2,158 +2,63 @@ import java.util.*;
 
 public class Level1
 {
+	public static String BiggerGreater(String input) {
 	
-	private static String text = "";
-	
-	private static String[] history = new String[0];
-	
-	private static int historyIndex = -1;
-	
-	public static String BastShoe(String command) {
+		char[] inputed = input.toCharArray();
 		
-		char numOperation = command.charAt(0);
+		char minForReplace = input.charAt(0);
+		int minIndexReplace = -1;
 		
+		char maxForReplace = input.charAt(0);
+		int maxIndexReplace = -1;
 		
-		switch (numOperation) {
-			case '1' : {
-				add(command.substring(2), false);
-				return text;
-			}
+		int different = 10000;
+		
+		for (int i = 0; i < input.length(); ++i) {
+			String check = new String (new char[] {minForReplace});
+			String checking = new String (new char[] {input.charAt(i)});
 			
-			case '2' : {
-				delete(Integer.parseInt(command.substring(2)), false);
-				return text;
-			}
-			
-			case '3' : {
-				return get(Integer.parseInt(command.substring(2)));
-			}
-			
-			case '4' : {
-				undo();
-				return text;
-			}
-			
-			case '5' : {
-				redo();
-				return text;
-			}
-		}
-		return "here";
-		
-	}
-	
-	
-	private static void add (String S, boolean onHistory) {
-		text += S;
-		
-		if (!onHistory && historyIndex == history.length - 1) {
-			addNewAction(1, S);
-			return;
-		}
-		else if (onHistory) {
-			return;
-		}
-		
-		history = new  String[0];
-		addNewAction(1, S);
-		
-	}
-	
-	private static void delete (int N, boolean onHistory) {
-		if (N > text.length()) {
-			text = "";
-		}
-		else {
- 
-			String reversed = new StringBuilder(text).reverse().toString();
-			
-			String forDelete = reversed.substring(0, N);
-			
-		
-			
-			reversed = reversed.replaceFirst(forDelete, "");
-			
-			text = new StringBuilder(reversed).reverse().toString();
-			
-			if (!onHistory && historyIndex == history.length - 1) {
-				addNewAction(2, new StringBuilder(forDelete).reverse().toString());
-				return;
-			}
-			else if (onHistory) {
-				return;
-			}
-			
-			history = new  String[0];
-			addNewAction(2, new StringBuilder(forDelete).reverse().toString());
-			
-		}
-		
-	}
-	
-	private static String get(int i) {
-		if (i >= 0 && i < text.length()) return new String(new char[] {text.charAt(i)});
-		return "";
-	}
-	
-	private static void undo() {
-		if (historyIndex <= -1 || historyIndex > history.length - 1) return;
-		String historyFragment = history[historyIndex];
-		
-		String numOperation = new String(new char[] {historyFragment.charAt(0)});
-		
-		String word = historyFragment.replaceFirst(numOperation + " ", "");
-		
-		switch (numOperation) {
-			case "1" : {
-				delete(word.length(), true);
-				--historyIndex;
-				break;
-			}
-			case "2" : {
-				add(word, true);
-				--historyIndex;
-				break;
+			if (check.compareTo(checking) >= 0) { 
+				minForReplace = checking.charAt(0);
+				minIndexReplace = i;
 			}
 		}
 		
-	}
-	
-	
-	private static void redo() {
-		++historyIndex;
+		for (int i = minIndexReplace; i < input.length(); ++i) {
+			String check = new String(new char[] {maxForReplace});
+			String checking = new String(new char[] {input.charAt(i)});
+			String min = new String(new char[] {minForReplace});
 
-		if (historyIndex <= -1 || historyIndex > history.length - 1) return;
-		
-		String historyFragment = history[historyIndex];
-		
-		String numOperation = new String(new char[] {historyFragment.charAt(0)});
-		
-		String word = historyFragment.replaceFirst(numOperation + " ", "");
-
-		switch (numOperation) {
-			case "1" : {
-				add(word, true);
-				break;
+			if (check.compareTo(checking) <= 0 && min.compareTo(checking) < different) {
+				different = min.compareTo(check);
+				maxForReplace = checking.charAt(0);
+				maxIndexReplace = i;
 			}
-			case "2" : {
-				delete(word.length(), true);
-				break;
-			}	
-		}
-
-	}
-	
-	
-	private static void addNewAction (int action, String word) {
-		String[] newHistory = new String[history.length + 1];
-		
-		for (int i = 0; i < history.length; ++i) {
-			newHistory[i] = history[i]; 
 		}
 		
-		newHistory[history.length] = action + " " + word;
-		historyIndex = history.length;
-		history = newHistory;
+		if (maxIndexReplace != -1 && minIndexReplace != -1) {
+			char buffer = inputed[minIndexReplace];
+			inputed[minIndexReplace] = inputed[maxIndexReplace];
+			inputed[maxIndexReplace] = buffer;
+			
+			for (int i = minIndexReplace + 1; i < input.length(); ++i) {
+				String check = new String(new char[] {inputed[i]});
+				
+				for (int j = minIndexReplace + 1; j < input.length(); ++j) {
+					String checking = new String(new char[] {inputed[j]});
+					if (check.compareTo(checking) < 0) {
+						char buf = inputed[i];
+						inputed[i] = inputed[j];
+						inputed[j] = buf;
+					}
+				}
+			}
+		}
+		
+		String ready = new String(inputed);
+		
+		if (ready.compareTo(input) != 0) return ready;
+		else return "";
+		
 	}
 }
