@@ -19,9 +19,10 @@ public class Level1
 			char localMaxSymbol = '1';
 			
 			for (int j = i; j < input.length(); ++j) {
+				
 				String checking = new String(new char[] {inputed[j]});
 				
-				if (check.compareTo(checking) < 0 && (localMaxSymbol == '1' || checking.compareTo(new String (new char[] {localMaxSymbol})) > 0) ) {
+				if (check.compareTo(checking) < 0 && (localMaxSymbol == '1' || checking.compareTo(new String (new char[] {localMaxSymbol})) < 0) ) {
 					
 					localMaxIndex = j;
 					localMaxSymbol = inputed[j];
@@ -43,7 +44,7 @@ public class Level1
 		char buffer = inputed[minIndex];
 		inputed[minIndex] = inputed[localMaxIndex];
 		inputed[localMaxIndex] = buffer;
-				
+		
 		for (int i = minIndex + 1; i < input.length(); ++i) {
 			
 			String check = new String(new char[] {inputed[i]});
