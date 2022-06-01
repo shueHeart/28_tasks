@@ -13,25 +13,23 @@ public class Level1
 		for (int i = 0; i < input.length(); ++i) {
 			
 			String check = new String(new char[] {inputed[i]});
-			
-			if (minIndex != -1 && check.compareTo(new String(new char[] {inputed[minIndex]})) < 0) continue;
 
 			boolean newMin = false;
 					
 			char localMaxSymbol = '1';
 			
 			for (int j = i; j < input.length(); ++j) {
-				
 				String checking = new String(new char[] {inputed[j]});
 				
 				if (check.compareTo(checking) < 0 && (localMaxSymbol == '1' || checking.compareTo(new String (new char[] {localMaxSymbol})) > 0) ) {
+					
 					localMaxIndex = j;
 					localMaxSymbol = inputed[j];
-						
+									
 					newMin = true;
 					
 				}
-				
+			
 			}
 
 			if (newMin) {
@@ -45,7 +43,7 @@ public class Level1
 		char buffer = inputed[minIndex];
 		inputed[minIndex] = inputed[localMaxIndex];
 		inputed[localMaxIndex] = buffer;
-		
+				
 		for (int i = minIndex + 1; i < input.length(); ++i) {
 			
 			String check = new String(new char[] {inputed[i]});
