@@ -11,7 +11,7 @@ public class Level1
 		
 		boolean deleteAlready = false;
 		
-		for (int i = 0; i < alphabet.length; ++i) {
+		for (int i = 0; i < alphabet.length && s.length() != 0; ++i) {
 			
 			int prevLength = s.length();
 			
@@ -25,13 +25,13 @@ public class Level1
 				continue;
 			}
 			
-			if (Math.abs(lastNum - newNum) == 1) deleteAlready = true;
+			if (Math.abs(lastNum - newNum) == 1 && deleteAlready) return false;
 			else if (Math.abs(lastNum - newNum) > 1) return false;
-			else if (deleteAlready) return false;
+			else if (deleteAlready) deleteAlready = true;
 			
 			lastNum = newNum;
 		}
 		
 		return true;
-	}	
+	}
 }
