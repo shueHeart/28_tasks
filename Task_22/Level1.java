@@ -19,7 +19,7 @@ public class Level1
 			int newNum = prevLength - s.length();
 			
 			if (newNum == 0) continue;
-			System.out.println(alphabet[i]);
+			
 			if (maxNum == 0) {
 				maxNum = newNum;
 				continue;
