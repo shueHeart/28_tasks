@@ -19,15 +19,15 @@ public class Level1
 			int newNum = prevLength - s.length();
 			
 			if (newNum == 0) continue;
-			
+			System.out.println(alphabet[i]);
 			if (maxNum == 0) {
 				maxNum = newNum;
 				continue;
 			}
 			
 			if (Math.abs(maxNum - newNum) == 1 && deleteAlready) return false;
-			else if (Math.abs(maxNum - newNum) > 1) return false;
-			else if (Math.abs(maxNum - newNum) == 1) deleteAlready = true;
+			if (Math.abs(maxNum - newNum) > 1) return false;
+			if (Math.abs(maxNum - newNum) == 1) deleteAlready = true;
 			
 			maxNum = newNum;
 		}
