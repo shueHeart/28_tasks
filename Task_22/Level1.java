@@ -7,7 +7,7 @@ public class Level1
 		
 		char[] alphabet = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'y', 'z'};
 		
-		int lastNum = 0;
+		int maxNum = 0;
 		
 		boolean deleteAlready = false;
 		
@@ -19,17 +19,17 @@ public class Level1
 			int newNum = prevLength - s.length();
 			
 			if (newNum == 0) continue;
-			
-			if (lastNum == 0) {
-				lastNum = newNum;
+			System.out.println(alphabet[i]);
+			if (maxNum == 0) {
+				maxNum = newNum;
 				continue;
 			}
 			
-			if (Math.abs(lastNum - newNum) == 1 && deleteAlready) return false;
-			else if (Math.abs(lastNum - newNum) > 1) return false;
-			else if (deleteAlready) deleteAlready = true;
+			if (Math.abs(maxNum - newNum) == 1 && deleteAlready) return false;
+			else if (Math.abs(maxNum - newNum) > 1) return false;
+			else if (Math.abs(maxNum - newNum) == 1) deleteAlready = true;
 			
-			lastNum = newNum;
+			maxNum = newNum;
 		}
 		
 		return true;
