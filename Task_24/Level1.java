@@ -37,7 +37,7 @@ public class Level1
 						
 			String frontShiftedTop = Matrix[strokeShift].substring(0, columnShift);
 			String centerShiftedTop = turnedConverted.substring(0, N - columnShift * 2);
-			String endShiftedTop = Matrix[strokeShift].substring(M - columnShift, M);
+			String endShiftedTop = Matrix[strokeShift].substring(N - columnShift, N);
 			
 			String firstTurnedStroke = frontShiftedTop + centerShiftedTop + endShiftedTop;
 			
@@ -52,15 +52,14 @@ public class Level1
 				Matrix[j + 1] = stroke;
 				
 				turnedConverted = turnedConverted.replaceFirst(new String(new char[] {turnedConverted.charAt(0)}), "");
-
 			}
 			
 			String frontShiftedBottom = Matrix[(M - 1) - strokeShift].substring(0, columnShift);
 			String centerShiftedBottom = new StringBuilder(turnedConverted.substring(0, N - columnShift * 2)).reverse().toString();
-			String endShiftedBottom = Matrix[(M - 1) - strokeShift].substring(M - columnShift, M);
+			String endShiftedBottom = Matrix[(M - 1) - strokeShift].substring(N - columnShift, N);
 			
 			String lastTurnedStroke = frontShiftedBottom + centerShiftedBottom + endShiftedBottom;
-						
+			
 			Matrix[(M - 1) - strokeShift] = lastTurnedStroke;
 			
 			turnedConverted = turnedConverted.replaceFirst(new StringBuilder(centerShiftedBottom).reverse().toString(), "");
@@ -75,11 +74,10 @@ public class Level1
 
 				turnedConverted = turnedConverted.replaceFirst(new String(new char[] {turnedConverted.charAt(0)}), "");
 			}
-			
+
 			++strokeShift;
 			++columnShift;
 		}
-		
 		
 	}
 	
