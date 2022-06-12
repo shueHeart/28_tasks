@@ -19,11 +19,13 @@ public class Level1
 	}	
 	
 	private static void TTAlgorithm (int[] A, int N) {
-		for (int i = 0; i < A.length; ++i) {
-			for (int j = 0; j < A.length - i; ++j) {
+		B = new int[0];
+		for (int i = 0; i < N; ++i) {
+			for (int j = 0; j < N - i; ++j) {
 				int max = -1;
-				for (int k = j; k <= i + j; ++k) {
-					if (max < A[k]) max = A[k];
+				int k = i + j;
+				for (int c = j; c <= k; ++c) {
+					if (max < A[c]) max = A[c];
 				}
 				B = writeToEnd(B, max);
 			}
