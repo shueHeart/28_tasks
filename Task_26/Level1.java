@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Level1
 {
-	public static boolean WhiteWalkers (String village) {
+	public static boolean white_walkers (String village) {
 		
 		boolean firstWalkersFounded = false;
 		
@@ -41,7 +41,7 @@ public class Level1
 				continue; 
 			}
 			
-			if (obj == 61) ++whiteWalkersCount;
+			if (obj == 61 && lastVillager != 0) ++whiteWalkersCount;
 			
 		}
 		
