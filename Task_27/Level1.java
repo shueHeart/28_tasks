@@ -13,7 +13,7 @@ public class Level1
 			
 			if (F[i] < F[i + 1] && lengthSeries != 0) {
 				lastLengthSeries = lengthSeries;
-				++countSeries;
+				++countSeries; 
 				lengthSeries = 0;
 				continue;
 			}
@@ -26,6 +26,6 @@ public class Level1
 			if (countSeries > 0 && lastLengthSeries > 1) return false;
 		}
 		
-		return true;
+		return countSeries != 0;
 	}
 }
